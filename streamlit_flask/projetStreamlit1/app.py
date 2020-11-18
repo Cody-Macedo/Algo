@@ -106,20 +106,21 @@ def graphRelplot(df):
     st.pyplot(fig)
 
 
-st.header("Graph select")
+st.header("Choix du graph")
 typeGraph = st.selectbox("Selectionner les colonnes", ['Heatmap', 'Bar', 'Line'])
 st.write(typeGraph)
 
-sc = st.multiselect("Selectionner les colonnes pour le graphe", columns)
-dfSelectedToGraph = dfCurrent[sc]
-
+ms = st.multiselect("Selectionner les colonnes pour le graphe", columns)
+dfSelectedToGraph = dfCurrent[ms]
 if st.button("Afficher le graphe"):
     try:
         if typeGraph == "Heatmap":
             print("Heatmap")
             graphHeatmap(dfSelectedToGraph)
         if typeGraph == "Bar":
-            print("Bar")
+            # vc_plot = dfCurrent.groupby(dfCurrent.columns.tolist())[columns].count()
+            # st.write(vc_plot.plot(kind="bar"))
+            # st.pyplot()
             graphBar(dfSelectedToGraph)
         if typeGraph == "Line":
             print("Line")
@@ -128,3 +129,5 @@ if st.button("Afficher le graphe"):
             print('not exist')
     except ValueError:
         print("error: " + ValueError)
+
+
