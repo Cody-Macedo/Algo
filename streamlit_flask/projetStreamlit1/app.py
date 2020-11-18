@@ -20,8 +20,8 @@ st.write(dfVgSales.columns.tolist())
 
 # Afficher le type des colonnes du dataset ainsi que les colonnes sélectionnées
 st.header("Affichage du type des colonnes")
-Year = st.checkbox("Year")
-Genre = st.checkbox("Genre")
+checkBoxes = [st.checkbox(i, key=i) for i in dfVgSales]
+print('checkBoxes: ' + checkBoxes)
 if st.button("Afficher les types"):
     st.write(dfVgSales.dtypes)
     st.write('à finir')
