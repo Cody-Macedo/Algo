@@ -10,9 +10,19 @@ bookListObject = []
 with open('json/books.json', 'r') as json_book:
     book_data = json.loads(json_book.read())
     for book in book_data:
-        bookListObject.append(Book(**book))
+        # print("book : ", book)
+        # print("\n")
+        # print(json.dumps(book))
+        try:
+            bookListObject.append(
+                Book(**book)
+            )
+        except:
+            pass
 
-print('book list ' , bookListObject.__str__())
+print('book list ', bookListObject.__str__())
+
+
 @app.route("/")
 @app.route("/index/")
 def index():
@@ -34,15 +44,26 @@ def api_books():
     return jsonify(booksJson)
 
 
-@app.route("/api/books/<id>")
+@app.route("/api/books/id/<id>")
 def api_books_id(id):
-    lesBook = Book.from_json(booksJson)
-    print("les books : " + book)
-    # for i in lesBook:
-    #     if booksJson[i].id == id:
-    #         print(booksJson)
-    return 'test'
+    for book in bookListObject:
+        # print("book isbn" + book.isbn)
+        if book.isbn == id:
+            theBook = book
+        else:
+            pass
+    return render_template('book.html', book=theBook)
 
+
+@app.route("/api/books/title/<string:title>")
+def api_books_title(title):
+    global theBookTitle
+    for book in bookListObject:
+        if book.title == title:
+            theBook = book
+        else:
+            pass
+    return render_template('book.html', book=theBook)
 
 
 if __name__ == '__main__':
