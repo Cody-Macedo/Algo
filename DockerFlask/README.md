@@ -73,3 +73,11 @@ Option:
 
 ### exec / Enter inside the container
 `docker exec -it CONTAINER_ID /bin/bash`
+
+###Heroku
+running bash app:
+`heroku run bash --app intense-savannah-03963`  
+open (start web): 
+`heroku open --app intense-savannah-03963`  
+debug : 
+`heroku logs --tail`
