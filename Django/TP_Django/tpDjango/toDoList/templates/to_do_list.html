@@ -29,12 +29,23 @@
                         <p>
                             {{ task.content }} - {{ task.created_date }}
                         </p>
-                        <button type="button" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>
-                        </button>
-                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i>
-                        </button>
-                        <a href="{% url 'update_task' task.id %}" type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i>
-                        </a>
+                        <div class="d-flex justify-content-start">
+                            {#                            <button type="button" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>#}
+                            {#                            </button>#}
+                            <form action="{% url 'done_task' task.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-success" value="Fait"><i
+                                        class="fa fa-check-circle"></i></button>
+                            </form>
+                            <form action="{% url 'delete_task' task.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-danger" value="Supprimer"><i
+                                        class="fa fa-trash-alt"></i></button>
+                            </form>
+                            <a href="{% url 'update_task' task.id %}" type="button" class="btn btn-outline-primary"><i
+                                    class="fas fa-edit"></i>
+                            </a>
+                        </div>
                     </div>
 
                 </div>

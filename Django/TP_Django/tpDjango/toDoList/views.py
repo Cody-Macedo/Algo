@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader
 
@@ -39,8 +39,23 @@ def updateTask(request, pk):
         form = TaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/to_do_list/')
+            return HttpResponseRedirect('/todolist/')
 
     form = TaskForm(instance=task)
     context = {'form': form}
     return render(request, 'update_task.html', context)
+
+
+def deleteTask(request, pk):
+    task = Task.objects.get(id=pk)
+    task.delete()
+    if request.method == 'POST':
+        return redirect('/todolist/')
+
+
+def doneTask(request, pk):
+    task = Task.objects.get(id=pk)
+    if request.method == 'POST':
+        task.is_done = True
+        task.save()
+        return redirect('/todolist/')

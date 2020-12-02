@@ -2,7 +2,7 @@
 {% load static %}
 {% block body %}
     <div class="d-flex justify-content-center">
-        <form class="form-inline" action="/todolist/update_task/" method="post">
+        <form class="form-inline" method="post">
             {% csrf_token %}
             <div class="form-group mx-sm-3 mb-2">
                 {{ form }}

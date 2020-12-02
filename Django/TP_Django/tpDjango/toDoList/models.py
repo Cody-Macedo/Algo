@@ -10,5 +10,5 @@ from django import forms
 class Task(models.Model):
     content = models.CharField(max_length=255, default='NaN')
     is_done = models.BooleanField(default=False)
-    created_date = models.DateTimeField('date created', default=datetime.now())
+    created_date = models.DateTimeField(auto_now_add=True)
 
