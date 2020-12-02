@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <form class="form-inline" action="/todolist/update_task/" method="post">
+            {% csrf_token %}
+            <div class="form-group mx-sm-3 mb-2">
+                {{ form }}
+            </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+            <a href="/todolist/" type="button" class="btn btn-danger" style="margin-left: 5px"> Annuler</a>
+
+        </form>
+    </div>
+{% endblock %}

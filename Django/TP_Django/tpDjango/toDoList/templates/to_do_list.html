@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+    <div class="d-flex justify-content-center">
+        <form class="form-inline" action="/todolist/" method="post">
+            {% csrf_token %}
+            <div class="form-group mx-sm-3 mb-2">
+                {{ form }}
+            </div>
+            <input class="btn btn-success" type="submit" value="Submit">
+        </form>
+    </div>
+    {% if tasks %}
+
+        {% for task in tasks %}
+
+            {% if task.is_done %}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="task-done">
+                            {{ task.content }} - {{ task.created_date }}
+                        </p>
+                    </div>
+                </div>
+
+            {% else %}
+                <div class="card">
+                    <div class="card-body">
+                        <p>
+                            {{ task.content }} - {{ task.created_date }}
+                        </p>
+                        <button type="button" class="btn btn-outline-success"><i class="fas fa-check-circle"></i>
+                        </button>
+                        <button type="button" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i>
+                        </button>
+                        <a href="{% url 'update_task' task.id %}" type="button" class="btn btn-outline-primary"><i class="fas fa-edit"></i>
+                        </a>
+                    </div>
+
+                </div>
+            {% endif %}
+
+            <hr>
+
+        {% endfor %}
+    {% else %}
+        <p>No Task</p>
+    {% endif %}
+
+{% endblock %}
+
