@@ -6,7 +6,7 @@ from .models import Task
 
 
 class TaskForm(ModelForm):
-    content = forms.CharField(label='Content',
+    content = forms.CharField(label='Ajouter une tâche: ',
                               max_length=200,
                               widget=forms.TextInput(attrs={'class': 'form-control'}))
 
